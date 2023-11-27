@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChatManager : MonoBehaviour
+public class RandomChatMessage : MonoBehaviour
 {
-    public List<GameObject> ChatList;
+    public string[] Nouns;
+    public string[] Verbs;
+    public string[] Adjectives;
+    public string[] Clauses;
 
-    public float ChatLimit;
+    public ChatSpawner Spawner;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +19,6 @@ public class ChatManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ChatList.Count > ChatLimit)
-        {
-            ChatList.RemoveAt(0);
-        }
+        
     }
 }
