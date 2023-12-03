@@ -154,4 +154,11 @@ public class ChatSpawner : MonoBehaviour
             ChatManager.ChatList.Add(RandomMessageOBJ);
         }
     }
+
+
+
+    public void SendChatUi()
+    {
+        SendStreamMessageEvent(InputField.text);
+    }
 }
