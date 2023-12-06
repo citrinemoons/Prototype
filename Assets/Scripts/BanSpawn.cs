@@ -4,22 +4,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UiClickEvent : MonoBehaviour, IPointerClickHandler
+public class BanSpawn : MonoBehaviour, IPointerClickHandler
 {
     public GameObject BanDropDown;
-    public static event BanMessage
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            Debug.Log("YouRightClicked");
-
-            GameObject BanMessage = Instantiate(BanDropDown, eventData.pointerCurrentRaycast.worldPosition, new Quaternion(0, 0, 0, 0));
-            TheController.GetComponent<Controller>().CheckBan(BanMessage);
-            GameObject ChatMessage = eventData.selectedObject as GameObject;
-            BanMessage.GetComponent<BanMessage>().TheMessage = ChatMessage;
-            Debug.Log(ChatMessage);
-            
+          
         }
         else if (eventData.button == PointerEventData.InputButton.Middle)
         {
@@ -28,8 +20,16 @@ public class UiClickEvent : MonoBehaviour, IPointerClickHandler
 
         else if (eventData.button == PointerEventData.InputButton.Right)
         {
-
-            Debug.Log("Left click");
+            if (BanCheckOne._instance != null)
+            {
+                GameObject Oldmessage = BanCheckOne._instance.gameObject;
+                Destroy(Oldmessage);
+            }
+            GameObject BanMessage = Instantiate(BanDropDown, eventData.pointerCurrentRaycast.worldPosition, new Quaternion(0, 0, 0, 0));
+            GameObject ChatMessage = eventData.pointerPress;
+            Debug.Log(ChatMessage);
+            BanMessage.GetComponent<BanMessage>().TheMessage = ChatMessage;
+        
         }
     }
     // Start is called before the first frame update

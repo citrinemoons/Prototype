@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using JetBrains.Annotations;
 
-public class Controller : MonoBehaviour
+public class GameController : MonoBehaviour
 {
     public TMP_Text viewsText;
     public GameObject SingleMessageBan;
@@ -13,20 +13,47 @@ public class Controller : MonoBehaviour
 
     public double views;
 
-    public UpgradesManager upgradesManager;
+    public string StreamerName;
 
     public float timer;
     public float streambottimer;
+
+    public bool IsLive;
+
+    private static GameController Controllerinstance;
+
+    public static GameController ControllerInstance
+
+    {
+        get { return Controllerinstance; }
+        set
+        {
+            if (Controllerinstance == null)
+            {
+                Controllerinstance = value;
+            }
+            else
+            {
+                Destroy(value.gameObject);
+            }
+        }
+    }
+    private void Awake()
+    {
+        ControllerInstance = this;
+    }
+    private void OnEnable() => BanMessage.OnBanMessageCheck += AddPointsForBan;
+    private void OnDisable() => BanMessage.OnBanMessageCheck += AddPointsForBan;
     public void Update()
     {
-        viewsText.text = $"{Mathf.Round((float)views)} Views";
+        viewsText.text = $"{Mathf.Round((float)views)} StreamPoints";
         ClickAutomation();
     }
 
     public void GernerateViews()
     {
-        Debug.Log("you have earned views");
-        views = (1 * upgradesManager.clickupgrades+1) + views;
+        Debug.Log("you have earned points");
+        views = (1 * UpgradesManager.UpgradeInstance.clickupgrades+1) + views;
 
     }
 
@@ -34,7 +61,7 @@ public class Controller : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (upgradesManager.streambots >=  1)
+        if (UpgradesManager.UpgradeInstance.streambots >= 1)
         {
             if (timer > streambottimer)
             {
@@ -46,6 +73,20 @@ public class Controller : MonoBehaviour
 
 
     }
+
+    public void GoLive()
+    {
+       
+
+
+
+    }
+
+    public void AddPointsForBan()
+    {
+        views += 100;
+    }
+
     public void CheckBan(GameObject TheMessage)
     {
 

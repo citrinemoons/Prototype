@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class UpgradesManager : MonoBehaviour
 {
-    public Controller Controller;
 
     [Header("Streambots")]
     public int streambots;
@@ -24,7 +23,29 @@ public class UpgradesManager : MonoBehaviour
     [Header("Totals")]
     public float totalmultiplier;
 
-    
+    private static UpgradesManager Upgradeinstance;
+
+    public static UpgradesManager UpgradeInstance
+
+    {
+        get { return Upgradeinstance; }
+        set
+        {
+            if (Upgradeinstance == null)
+            {
+                Upgradeinstance = value;
+            }
+            else
+            {
+                Destroy(value.gameObject);
+            }
+        }
+    }
+    private void Awake()
+    {
+        UpgradeInstance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +71,7 @@ public class UpgradesManager : MonoBehaviour
             StreamBotButton.GetComponent<PurchaseUpgrade>().cost = streambotcost;
         }
 
-        Controller.streambottimer = streambotcosttimerbase / (1 + (streambotmultiplyer * (streambots-1)));
+        GameController.ControllerInstance.streambottimer = streambotcosttimerbase / (1 + (streambotmultiplyer * (streambots-1)));
 
 
         float clickupgradef = clickupgrades;
@@ -68,10 +89,6 @@ public class UpgradesManager : MonoBehaviour
 
 
 
-
-        //todoclick button.
-        //I did alot of this very quickly but I will explain tomorrow
-
     }
 
     public void PurchaseUpgrade(string Upgrade)
@@ -81,14 +98,14 @@ public class UpgradesManager : MonoBehaviour
         {
             streambots++;
             //Controller.timer = 0f;
-            Controller.views -= StreamBotButton.GetComponent<PurchaseUpgrade>().cost;
+            GameController.ControllerInstance.views -= StreamBotButton.GetComponent<PurchaseUpgrade>().cost;
         }
 
         if (Upgrade == "Click")
         {
             clickupgrades++;
 
-            Controller.views-= clickupgradebutton.GetComponent<PurchaseUpgrade>().cost;
+            GameController.ControllerInstance.views-= clickupgradebutton.GetComponent<PurchaseUpgrade>().cost;
         }
 
     }

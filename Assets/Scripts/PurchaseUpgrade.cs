@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class PurchaseUpgrade : MonoBehaviour
 {
-    public GameObject GameManager;
     public float cost;
     public bool IsPurchaseable;
     private Button Button;
@@ -15,7 +14,6 @@ public class PurchaseUpgrade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         Button = GetComponent<Button>();
 
     }
@@ -25,7 +23,7 @@ public class PurchaseUpgrade : MonoBehaviour
     {
         Button.interactable = IsPurchaseable;
         CostText.text = $"Cost : {Mathf.Round(cost)}";
-        if (GameManager.GetComponent<Controller>().views >= cost)
+        if (GameController.ControllerInstance.views >= cost)
         {
             IsPurchaseable = true;
         }
@@ -37,6 +35,6 @@ public class PurchaseUpgrade : MonoBehaviour
 
     public void ClickUpgrade()
     {
-        GameManager.GetComponent<UpgradesManager>().PurchaseUpgrade(WhatAmI);
+        GameController.ControllerInstance.gameObject.GetComponent<UpgradesManager>().PurchaseUpgrade(WhatAmI);
     }
 }

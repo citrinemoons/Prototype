@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Drawing;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChatSpawner : MonoBehaviour
 {
-    public string StreamerName;
-    public string[] Usernames;
+    public ViewerManager ViewerManager;
     public GameObject MessagePrefab;
     public Transform Parent;
     private TMP_InputField InputField;
+
+    public Scrollbar DaScrollbar;
 
     public ChatManager ChatManager;
 
@@ -21,43 +24,58 @@ public class ChatSpawner : MonoBehaviour
     public string[] Interjection;
     public string[] Pronouns;
     public string[] Prepositions;
+
+    public bool debug;
     // Start is called before the first frame update
     void Start()
     {
         InputField = GetComponentInChildren <TMP_InputField>();
     }
 
+    public void RandomMessageSystem()
+    {
 
+        
+
+    }
 
 
     // Update is called once per frame
     void Update()
     {
-
+        
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
             SendStreamMessageEvent(InputField.text);
+            DaScrollbar.value = 0;
         }
-
-        if (Input.GetKeyDown(KeyCode.R))
+        if (debug)
         {
-            //Debug.Log("Random Simplemessgae");
-            int sentencetype = Random.Range(0, 3);
-            if(sentencetype == 0)
+            if (Input.GetKeyUp(KeyCode.B))
             {
-                RandomChatMessage("simple", Random.Range(0, 3));
+                RandomChatMessage("bad", 0);
             }
-            if (sentencetype == 1)
+            if (Input.GetKeyDown(KeyCode.R))
             {
-                RandomChatMessage("complex", Random.Range(0, 3));
-            }
-            if (sentencetype == 2)
-            {
-                RandomChatMessage("hype", Random.Range(0, 3));
-            }
+                //Debug.Log("Random Simplemessgae");
+                int sentencetype = Random.Range(0, 3);
+                if (sentencetype == 0)
+                {
+                    RandomChatMessage("simple", Random.Range(0, 3));
+                }
+                if (sentencetype == 1)
+                {
+                    RandomChatMessage("complex", Random.Range(0, 3));
+                }
+                if (sentencetype == 2)
+                {
+                    RandomChatMessage("hype", Random.Range(0, 3));
+                }
 
+            }
         }
+        
     }
 
 
@@ -68,7 +86,7 @@ public class ChatSpawner : MonoBehaviour
             return;
         }
         GameObject MessageOBJ = Instantiate(MessagePrefab, Parent);
-        string chatmessage = $"<b><color=#ff0000ff>{StreamerName}</b>:</color>{chat}";
+        string chatmessage = $"<b><color=#ff0000ff>{GameController.ControllerInstance.StreamerName}</b>:</color>{chat}";
         MessageOBJ.GetComponentInChildren<TextMeshProUGUI>().text = chatmessage;
         InputField.text = string.Empty;
         ChatManager.ChatList.Add(MessageOBJ);
@@ -93,14 +111,13 @@ public class ChatSpawner : MonoBehaviour
                 case 0:
                     randstring = $"I {Verbs[Random.Range(0, Verbs.Length)]} {Adjectives[Random.Range(0, Adjectives.Length)]} {Nouns[Random.Range(0, Nouns.Length)]}";
                     break;
-               
-                
+
+
             }
             GameObject RandomMessageOBJ = Instantiate(MessagePrefab, Parent);
-            Color32 namecolor = Random.ColorHSV(0, 1, 0.7f, 1, 0.8f, 1);
-            string RancomChatMessgaeString = $"<b><color=#{UnityEngine.ColorUtility.ToHtmlStringRGB(namecolor)}>{Usernames[Random.Range(0,Usernames.Length)]}</b>:</color>{randstring}";
+            GameObject ourviewer = ViewerManager.GetGoodViewer();
+            string RancomChatMessgaeString = $"<b><color=#{ourviewer.GetComponent<Viewer>().ViewerColor.ToHexString()}>{ourviewer.name}</b>:</color>{randstring}";
             RandomMessageOBJ.GetComponentInChildren<TextMeshProUGUI>().text = RancomChatMessgaeString;
-
             ChatManager.ChatList.Add(RandomMessageOBJ);
         }
 
@@ -122,9 +139,10 @@ public class ChatSpawner : MonoBehaviour
 
             }
             GameObject RandomMessageOBJ = Instantiate(MessagePrefab, Parent);
-            Color32 namecolor = Random.ColorHSV(0, 1, 0.7f, 1, 0.8f, 1);
-            string RancomChatMessgaeString = $"<b><color=#{UnityEngine.ColorUtility.ToHtmlStringRGB(namecolor)}>{Usernames[Random.Range(0, Usernames.Length)]}</b>:</color>{randstring}";
+            GameObject ourviewer = ViewerManager.GetGoodViewer();
+            string RancomChatMessgaeString = $"<b><color=#{ourviewer.GetComponent<Viewer>().ViewerColor.ToHexString()}>{ourviewer.name}</b>:</color>{randstring}";
             RandomMessageOBJ.GetComponentInChildren<TextMeshProUGUI>().text = RancomChatMessgaeString;
+            ChatManager.ChatList.Add(RandomMessageOBJ);
 
             ChatManager.ChatList.Add(RandomMessageOBJ);
         }
@@ -147,11 +165,35 @@ public class ChatSpawner : MonoBehaviour
 
             }
             GameObject RandomMessageOBJ = Instantiate(MessagePrefab, Parent);
-            Color32 namecolor = Random.ColorHSV(0, 1, 0.7f, 1, 0.8f, 1);
-            string RancomChatMessgaeString = $"<b><color=#{UnityEngine.ColorUtility.ToHtmlStringRGB(namecolor)}>{Usernames[Random.Range(0, Usernames.Length)]}</b>:</color>{randstring}";
+            GameObject ourviewer = ViewerManager.GetGoodViewer();
+            string RancomChatMessgaeString = $"<b><color=#{ourviewer.GetComponent<Viewer>().ViewerColor.ToHexString()}>{ourviewer.name}</b>:</color>{randstring}";
             RandomMessageOBJ.GetComponentInChildren<TextMeshProUGUI>().text = RancomChatMessgaeString;
-
             ChatManager.ChatList.Add(RandomMessageOBJ);
+        }
+        if (type == "bad")
+        {
+            string randstring = string.Empty;
+            switch (rand)
+            {
+
+                case 2:
+                    randstring = $"L Steamer";
+                    break;
+                case 1:
+                    randstring = $"Daum I didnt expect to be bored by this stream,Go do something better lmao";
+                    break;
+                case 0:
+                    randstring = $"Fuck off";
+                    break;
+            }
+            GameObject RandomMessageOBJ = Instantiate(MessagePrefab, Parent);
+            GameObject ourviewer = ViewerManager.GetBadViewer();
+            string RancomChatMessgaeString = $"<b><color=#{ourviewer.GetComponent<Viewer>().ViewerColor.ToHexString()}>{ourviewer.name}</b>:</color>{randstring}";
+            RandomMessageOBJ.GetComponentInChildren<TextMeshProUGUI>().text = RancomChatMessgaeString;
+            ChatManager.ChatList.Add(RandomMessageOBJ);
+            RandomMessageOBJ.GetComponent<ChatMessage>().BadMessage = true;
+
+
         }
     }
 }

@@ -417,6 +417,7 @@ GameObject:
   - component: {fileID: 179107704489207768}
   - component: {fileID: 4030260864689645176}
   - component: {fileID: -6005595510079556395}
+  - component: {fileID: 1560212628052023174}
   m_Layer: 5
   m_Name: BanDropdown
   m_TagString: Untagged
@@ -576,6 +577,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1560212628052023174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8206223871117680147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca3814376102d84a99cfc018b01d5da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8535139374010885455
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,8 +8,7 @@ public class ChatMessage : MonoBehaviour
     private TextMeshProUGUI Textmesh;
     public Vector2 Size;
     public float Spacing;
-    public string hexcolor;
-    public Color ChatColor;
+    public bool BadMessage;
     // Start is called before the first frame update
     void Start()
     {

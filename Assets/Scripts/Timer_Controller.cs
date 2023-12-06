@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class Timer_Controller : MonoBehaviour
 {
-    public UpgradesManager TheUpgradeManager;
-    public Controller TimerController;
     public Slider TheSlider;
     // Start is called before the first frame update
     void Start()
@@ -20,7 +18,7 @@ public class Timer_Controller : MonoBehaviour
 
 
 
-        if (TheUpgradeManager.streambots >= 1)
+        if (UpgradesManager.UpgradeInstance.streambots >= 1)
         {
             TheSlider.gameObject.SetActive(true);
         }
@@ -28,8 +26,8 @@ public class Timer_Controller : MonoBehaviour
         {
             TheSlider.gameObject.SetActive(false);
         }
-        TheSlider.maxValue = TimerController.streambottimer;
-        TheSlider.value = TimerController.timer;
+        TheSlider.maxValue = GameController.ControllerInstance.streambottimer;
+        TheSlider.value = GameController.ControllerInstance.timer;
         
 
 
