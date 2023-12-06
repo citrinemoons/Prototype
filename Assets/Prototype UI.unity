@@ -390,7 +390,7 @@ GameObject:
   - component: {fileID: 48180401}
   - component: {fileID: 48180400}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Overlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -465,7 +465,7 @@ GameObject:
   - component: {fileID: 213946135}
   - component: {fileID: 213946134}
   m_Layer: 5
-  m_Name: Image
+  m_Name: VTuber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -540,7 +540,7 @@ GameObject:
   - component: {fileID: 251840946}
   - component: {fileID: 251840945}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Overlay 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -615,7 +615,7 @@ GameObject:
   - component: {fileID: 376374645}
   - component: {fileID: 376374644}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -762,6 +762,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d2d5480accc9346a59987361e5dda8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Controller: {fileID: 0}
+  streambots: 0
+  streambotcost: 0
+  streambotincome: 0
+  StreamBotButton: {fileID: 0}
+  StreambotVal: {fileID: 0}
+  clickupgrades: 0
+  clickupgradescost: 0
+  clickupgradebutton: {fileID: 0}
+  ClickUpgradeVal: {fileID: 0}
+  totalmultiplier: 0
 --- !u!114 &377003479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -788,6 +799,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   viewsText: {fileID: 744795914}
   views: 0
+  upgradesManager: {fileID: 0}
+  timer: 0
 --- !u!114 &377003481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -800,9 +813,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd4a67b5b8ab844ea48b643ed8b38bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chatBox: {fileID: 1734485475}
-  messageSend: {fileID: 979034941}
-  sendButton: {fileID: 1699666178}
+--- !u!1 &623914993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 623914994}
+  - component: {fileID: 623914995}
+  m_Layer: 0
+  m_Name: Counter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &623914994
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623914993}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2039677622}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &623914995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623914993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d32bb13c22e5645863100e7ec0f6c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewsText: {fileID: 744795914}
+  views: 0
+  upgradesManager: {fileID: 1037456622}
+  timer: 0
 --- !u!1 &744795912
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,7 +873,7 @@ GameObject:
   - component: {fileID: 744795915}
   - component: {fileID: 744795914}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: View Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1204,6 +1262,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 979034939}
   m_CullTransparentMesh: 1
+--- !u!1 &1037456621
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1037456623}
+  - component: {fileID: 1037456622}
+  m_Layer: 0
+  m_Name: Upgrade Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1037456622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037456621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d2d5480accc9346a59987361e5dda8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Controller: {fileID: 0}
+  streambots: 0
+  streambotcost: 0
+  streambotincome: 0
+  StreamBotButton: {fileID: 0}
+  StreambotVal: {fileID: 0}
+  clickupgrades: 0
+  clickupgradescost: 0
+  clickupgradebutton: {fileID: 0}
+  ClickUpgradeVal: {fileID: 0}
+  totalmultiplier: 0
+--- !u!4 &1037456623
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037456621}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1022.7946, y: 536.5421, z: -3.1402318}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1108715374
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,7 +1515,7 @@ GameObject:
   - component: {fileID: 1427836364}
   - component: {fileID: 1427836363}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Chat Overlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1753,7 +1866,7 @@ GameObject:
   - component: {fileID: 1734485476}
   - component: {fileID: 1734485475}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Chat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2011,6 +2124,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1821821501}
   m_CullTransparentMesh: 1
+--- !u!1 &2039677621
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2039677622}
+  m_Layer: 0
+  m_Name: Scripts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2039677622
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039677621}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 623914994}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2132590046
 GameObject:
   m_ObjectHideFlags: 0
@@ -2129,3 +2274,5 @@ SceneRoots:
   - {fileID: 884692798}
   - {fileID: 377003477}
   - {fileID: 2132590050}
+  - {fileID: 2039677622}
+  - {fileID: 1037456623}
