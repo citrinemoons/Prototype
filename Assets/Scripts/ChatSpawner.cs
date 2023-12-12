@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Drawing;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class ChatSpawner : MonoBehaviour
 {
+    
+
     public ViewerManager ViewerManager;
     public GameObject MessagePrefab;
     public Transform Parent;
@@ -38,7 +40,8 @@ public class ChatSpawner : MonoBehaviour
         
 
     }
-
+    private void OnEnable() => Viewer.OnSpawnNewMessage += GenerateType;
+    private void OnDisable() => Viewer.OnSpawnNewMessage -= GenerateType;
 
     // Update is called once per frame
     void Update()
@@ -59,19 +62,7 @@ public class ChatSpawner : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R))
             {
                 //Debug.Log("Random Simplemessgae");
-                int sentencetype = Random.Range(0, 3);
-                if (sentencetype == 0)
-                {
-                    RandomChatMessage("simple", Random.Range(0, 3));
-                }
-                if (sentencetype == 1)
-                {
-                    RandomChatMessage("complex", Random.Range(0, 3));
-                }
-                if (sentencetype == 2)
-                {
-                    RandomChatMessage("hype", Random.Range(0, 3));
-                }
+                
 
             }
         }
@@ -83,13 +74,34 @@ public class ChatSpawner : MonoBehaviour
     {
         if (string.IsNullOrEmpty(chat))
         {
-            return;
+
         }
-        GameObject MessageOBJ = Instantiate(MessagePrefab, Parent);
-        string chatmessage = $"<b><color=#ff0000ff>{GameController.ControllerInstance.StreamerName}</b>:</color>{chat}";
-        MessageOBJ.GetComponentInChildren<TextMeshProUGUI>().text = chatmessage;
-        InputField.text = string.Empty;
-        ChatManager.ChatList.Add(MessageOBJ);
+        else
+        {
+            GameObject MessageOBJ = Instantiate(MessagePrefab, Parent);
+            string chatmessage = $"<b><color=#ff0000ff>{GameController.ControllerInstance.StreamerName}</b>:</color>{chat}";
+            MessageOBJ.GetComponentInChildren<TextMeshProUGUI>().text = chatmessage;
+            InputField.text = string.Empty;
+            ChatManager.ChatList.Add(MessageOBJ);
+        }
+       
+    }
+
+    private void GenerateType()
+    {
+        int sentencetype = Random.Range(0, 3);
+        if (sentencetype == 0)
+        {
+            RandomChatMessage("simple", Random.Range(0, 3));
+        }
+        if (sentencetype == 1)
+        {
+            RandomChatMessage("complex", Random.Range(0, 3));
+        }
+        if (sentencetype == 2)
+        {
+            RandomChatMessage("hype", Random.Range(0, 3));
+        }
     }
 
     public void RandomChatMessage(string type, int rand)

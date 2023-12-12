@@ -20,9 +20,15 @@ public class UpgradesManager : MonoBehaviour
     public float clickupgradescostmulti;
     public GameObject clickupgradebutton;
     public TextMeshProUGUI ClickUpgradeVal;
+    [Header("Viewer Upgrades")]
+    public int viewergenerateupgrades;
+    public float viewergenerateupgradescost;
+    public float viewergenerateupgradescostmulti;
+    public GameObject viewergeneratebutton;
+    public TextMeshProUGUI viewergenerateVal;
     [Header("Totals")]
     public float totalmultiplier;
-
+   
     private static UpgradesManager Upgradeinstance;
 
     public static UpgradesManager UpgradeInstance
@@ -58,6 +64,7 @@ public class UpgradesManager : MonoBehaviour
 
         StreambotVal.text = $"Amount : {streambots}";
         ClickUpgradeVal.text = $"Amount : {clickupgrades}";
+        viewergenerateVal.text = $"Upgrades : {viewergenerateupgrades}";
 
         float streambotf = streambots;
         if (streambotf > 0)
@@ -86,7 +93,17 @@ public class UpgradesManager : MonoBehaviour
         {
             clickupgradebutton.GetComponent<PurchaseUpgrade>().cost = clickupgradescost;
         }
-
+        float viewerupgradef = viewergenerateupgrades;
+        if (viewerupgradef > 0 )
+        {
+            float multipiedviewcost = Mathf.Pow((viewergenerateupgradescostmulti), viewergenerateupgrades);
+            float viewupgradescosttemptemp = multipiedviewcost * viewergenerateupgradescost;
+            viewergeneratebutton.GetComponent<PurchaseUpgrade>().cost = viewupgradescosttemptemp;
+        }
+        else
+        {
+            viewergeneratebutton.GetComponent<PurchaseUpgrade>().cost = viewergenerateupgradescost;
+        }
 
 
     }
@@ -99,6 +116,7 @@ public class UpgradesManager : MonoBehaviour
             streambots++;
             //Controller.timer = 0f;
             GameController.ControllerInstance.views -= StreamBotButton.GetComponent<PurchaseUpgrade>().cost;
+            totalmultiplier++;
         }
 
         if (Upgrade == "Click")
@@ -106,8 +124,14 @@ public class UpgradesManager : MonoBehaviour
             clickupgrades++;
 
             GameController.ControllerInstance.views-= clickupgradebutton.GetComponent<PurchaseUpgrade>().cost;
+            totalmultiplier++;
         }
-
+        if (Upgrade == "Viewer")
+        {
+            viewergenerateupgrades++;
+            GameController.ControllerInstance.views -= viewergeneratebutton.GetComponent<PurchaseUpgrade>().cost;
+            totalmultiplier++;
+        }
     }
 
 }

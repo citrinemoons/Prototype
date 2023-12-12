@@ -50,10 +50,17 @@ public class GameController : MonoBehaviour
         ClickAutomation();
     }
 
-    public void GernerateViews()
+    public void GenerateViews()
     {
         Debug.Log("you have earned points");
-        views = (1 * UpgradesManager.UpgradeInstance.clickupgrades+1) + views;
+        if (IsLive)
+        {
+            views = (2 * (UpgradesManager.UpgradeInstance.clickupgrades * 2) + 1) + views;
+        }
+        else
+        {
+            views = (1 * UpgradesManager.UpgradeInstance.clickupgrades + 1) + views;
+        }
 
     }
 
@@ -65,18 +72,10 @@ public class GameController : MonoBehaviour
         {
             if (timer > streambottimer)
             {
-                StreamButton.onClick.Invoke();
+                GenerateViews();
                 timer = 0f;
             }
         }
-
-
-
-    }
-
-    public void GoLive()
-    {
-       
 
 
 
