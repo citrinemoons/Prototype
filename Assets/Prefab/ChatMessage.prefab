@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 205.99997, y: -6.017212}
-  m_SizeDelta: {x: 400.3517, y: 0}
+  m_AnchoredPosition: {x: 465.6867, y: -6.017212}
+  m_SizeDelta: {x: 919.7251, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1723832902752052275
 CanvasRenderer:
@@ -95,8 +95,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 33
+  m_fontSizeBase: 33
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -189,8 +189,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 411.1705, y: 84}
+  m_AnchoredPosition: {x: 0, y: -54.882202}
+  m_SizeDelta: {x: 855.5827, y: 193.7644}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &4650185827910586684
 CanvasRenderer:
@@ -244,8 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Size: {x: 0, y: 0}
   Spacing: 13.5
-  hexcolor: 
-  ChatColor: {r: 0, g: 0, b: 0, a: 0}
+  BadMessage: 0
 --- !u!114 &8432796410981173476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,4 +302,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BanDropDown: {fileID: 8206223871117680147, guid: 113a3dedf28d9b645ad3d01d7f186124, type: 3}
-  TheController: {fileID: 267572815622364627, guid: 7df61f936b946044e82462e97b719c31, type: 3}
